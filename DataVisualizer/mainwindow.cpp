@@ -10,13 +10,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     MainWindow::setWindowTitle("Data Visualizer");
     ui->lDebug->setText(QString("0x%1").arg((int64_t)QThread::currentThread(), 16));
 
-    for (const QSerialPortInfo &portInfo : QSerialPortInfo::availablePorts()) {
-        QStringList temp;
-        temp.append(portInfo.portName() + ";" + portInfo.description() + ";" + portInfo.manufacturer() + ";" + portInfo.serialNumber() + ";"
-                    + QString::number(portInfo.productIdentifier(), 16) + ";" + QString::number(portInfo.vendorIdentifier(), 16) + ";"
-                    + portInfo.systemLocation());
-        qInfo() << temp;
-    }
+
 }
 
 MainWindow::~MainWindow() {
