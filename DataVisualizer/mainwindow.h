@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QFuture>
 #include <QMainWindow>
 #include <QThread>
-
+#include <QtConcurrent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,9 +21,7 @@ public:
 
 private slots:
     void on_actionExit_triggered();
-
     void on_actionSerial_triggered();
-
     void on_actionNetwork_triggered();
 
 private:

@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,16 +12,12 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     networkdialog.cpp \
-    networkthread.cpp \
-    serialdialog.cpp \
-    serialthread.cpp
+    serialdialog.cpp
 
 HEADERS += \
     mainwindow.h \
     networkdialog.h \
-    networkthread.h \
-    serialdialog.h \
-    serialthread.h
+    serialdialog.h
 
 FORMS += \
     mainwindow.ui \
