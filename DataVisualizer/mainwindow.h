@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QThread>
 #include <QtConcurrent>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

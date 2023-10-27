@@ -1,4 +1,4 @@
-QT       += core gui concurrent
+QT       += core gui concurrent serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

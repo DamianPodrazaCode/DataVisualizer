@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QThread>
+#include <QSerialPortInfo>
 
 namespace Ui {
 class SerialDialog;
