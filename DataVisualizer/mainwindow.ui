@@ -25,13 +25,13 @@
    </property>
    <widget class="QMenu" name="menuNew_connect">
     <property name="title">
-     <string>Connection</string>
+     <string>Connections</string>
     </property>
     <addaction name="actionOpen"/>
-    <addaction name="actionSave_2"/>
+    <addaction name="actionSave"/>
     <addaction name="separator"/>
     <addaction name="actionSerial"/>
-    <addaction name="actionUDP"/>
+    <addaction name="actionNetwork"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
     <addaction name="separator"/>
@@ -44,14 +44,9 @@
     <string>Serial</string>
    </property>
   </action>
-  <action name="actionUDP">
+  <action name="actionNetwork">
    <property name="text">
     <string>Network</string>
-   </property>
-  </action>
-  <action name="actionTCP">
-   <property name="text">
-    <string>TCP</string>
    </property>
   </action>
   <action name="actionExit">
@@ -65,11 +60,6 @@
    </property>
   </action>
   <action name="actionSave">
-   <property name="text">
-    <string>Save</string>
-   </property>
-  </action>
-  <action name="actionSave_2">
    <property name="text">
     <string>Save</string>
    </property>

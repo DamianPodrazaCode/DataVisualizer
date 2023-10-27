@@ -19,6 +19,10 @@ public:
 private slots:
     void on_actionExit_triggered();
 
+    void on_actionSerial_triggered();
+
+    void on_actionNetwork_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

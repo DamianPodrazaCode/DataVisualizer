@@ -10,13 +10,19 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    networkdialog.cpp \
+    serialdialog.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    networkdialog.h \
+    serialdialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    networkdialog.ui \
+    serialdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
