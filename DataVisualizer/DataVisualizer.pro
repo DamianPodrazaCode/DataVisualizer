@@ -12,12 +12,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     networkdialog.cpp \
-    serialdialog.cpp
+    networkthread.cpp \
+    serialdialog.cpp \
+    serialthread.cpp
 
 HEADERS += \
     mainwindow.h \
     networkdialog.h \
-    serialdialog.h
+    networkthread.h \
+    serialdialog.h \
+    serialthread.h
 
 FORMS += \
     mainwindow.ui \

@@ -2,13 +2,13 @@
 #define SERIALDIALOG_H
 
 #include <QDialog>
+#include <QThread>
 
 namespace Ui {
 class SerialDialog;
 }
 
-class SerialDialog : public QDialog
-{
+class SerialDialog : public QDialog {
     Q_OBJECT
 
 public:

@@ -2,13 +2,13 @@
 #define NETWORKDIALOG_H
 
 #include <QDialog>
+#include <QThread>
 
 namespace Ui {
 class NetworkDialog;
 }
 
-class NetworkDialog : public QDialog
-{
+class NetworkDialog : public QDialog {
     Q_OBJECT
 
 public:

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="l_Debug">
+  <widget class="QLabel" name="lDebug">
    <property name="geometry">
     <rect>
      <x>10</x>
