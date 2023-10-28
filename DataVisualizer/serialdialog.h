@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QSerialPortInfo>
 #include <QThread>
+#include <QSettings>
 
 namespace Ui {
 class SerialDialog;
@@ -18,6 +19,9 @@ public:
 
 private slots:
     void on_pb_rescan_clicked();
+
+    void on_cb_baudrate_currentIndexChanged(int index);
+    void on_cb_databits_currentIndexChanged(int index);
 
 private:
     Ui::SerialDialog *ui;

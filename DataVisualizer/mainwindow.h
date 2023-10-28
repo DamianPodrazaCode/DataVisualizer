@@ -1,11 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QFuture>
 #include <QMainWindow>
 #include <QThread>
 #include <QtConcurrent>
-#include <QDebug>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +20,9 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    static QString getSettings(QString group, QString key);
+    static void setSettings(QString group, QString key, QString value);
 
 private slots:
     void on_actionExit_triggered();

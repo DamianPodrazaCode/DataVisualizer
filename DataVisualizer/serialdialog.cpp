@@ -1,4 +1,5 @@
 #include "serialdialog.h"
+#include "mainwindow.h"
 #include "ui_serialdialog.h"
 
 SerialDialog::SerialDialog(QWidget *parent) : QDialog(parent), ui(new Ui::SerialDialog) {
@@ -24,3 +25,12 @@ void SerialDialog::fill_cb_serialInfo() {
 void SerialDialog::on_pb_rescan_clicked() {
     fill_cb_serialInfo();
 }
+
+void SerialDialog::on_cb_baudrate_currentIndexChanged(int index) {
+    MainWindow::setSettings("serial", "BaudRate", ui->cb_baudrate->currentText());
+}
+
+void SerialDialog::on_cb_databits_currentIndexChanged(int index) {
+    MainWindow::setSettings("serial", "DataBits", ui->cb_databits->currentText());
+}
+
