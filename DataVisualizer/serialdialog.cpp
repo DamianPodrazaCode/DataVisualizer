@@ -34,7 +34,15 @@ void SerialDialog::fill_cb_serialInfo() {
                             + portInfo.serialNumber() + ";" + QString::number(portInfo.productIdentifier(), 16) + ";"
                             + QString::number(portInfo.vendorIdentifier(), 16) + ";" + portInfo.systemLocation());
 
-        ui->cb_portNr->addItem(portInfo.portName());
+        // sprawdzenie czyu port otwary, jeżeli nie to dodanie do listy możliwych portów
+        QSerialPort *COMPORT = new QSerialPort();
+        COMPORT->setPortName(portInfo.portName());
+        COMPORT->clearError();
+        COMPORT->open(QSerialPort::ReadWrite);
+        if (COMPORT->isOpen()) {
+            ui->cb_portNr->addItem(portInfo.portName());
+            COMPORT->close();
+        }
     }
     ui->cb_portNr->model()->sort(0);
 }

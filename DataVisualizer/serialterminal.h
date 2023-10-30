@@ -2,6 +2,7 @@
 #define SERIALTERMINAL_H
 
 #include <QDialog>
+#include <QSerialPort>
 
 namespace Ui {
 class serialTerminal;
