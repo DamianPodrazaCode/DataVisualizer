@@ -14,7 +14,7 @@ SerialTerminal::~SerialTerminal() {
 void SerialTerminal::start() {
     COMPORT = new QSerialPort();
     COMPORT->setPortName(PortName);
-    // COMPORT->setBaudRate(BaudRate.toInt());
+    COMPORT->setBaudRate(BaudRate.toInt());
 
     if (Parity == (QString) "NoParity")
         COMPORT->setParity(QSerialPort::NoParity);
@@ -27,20 +27,35 @@ void SerialTerminal::start() {
     else if (Parity == (QString) "EvenParity")
         COMPORT->setParity(QSerialPort::MarkParity);
 
-    //    COMPORT->setParity(Parity);
-    //    COMPORT->setDataBits(DataBits8);
-    //    COMPORT->setStopBits(QSerialPort::OneStop);
-    //    COMPORT->setFlowControl(QSerialPort::NoFlowControl);
-    //    COMPORT->clearError();
+    if (DataBits == (QString) "Data5")
+        COMPORT->setDataBits(QSerialPort::Data5);
+    else if (DataBits == (QString) "Data6")
+        COMPORT->setDataBits(QSerialPort::Data6);
+    else if (DataBits == (QString) "Data7")
+        COMPORT->setDataBits(QSerialPort::Data7);
+    else if (DataBits == (QString) "Data8")
+        COMPORT->setDataBits(QSerialPort::Data8);
+
+    if (StopBits == (QString) "OneStop")
+        COMPORT->setStopBits(QSerialPort::OneStop);
+    else if (StopBits == (QString) "OneAndHalfStop")
+        COMPORT->setStopBits(QSerialPort::OneAndHalfStop);
+    else if (StopBits == (QString) "TwoStop")
+        COMPORT->setStopBits(QSerialPort::TwoStop);
+
+    if (FlowControl == (QString) "NoFlowControl")
+        COMPORT->setFlowControl(QSerialPort::NoFlowControl);
+    else if (FlowControl == (QString) "HardwareControl")
+        COMPORT->setFlowControl(QSerialPort::HardwareControl);
+    else if (FlowControl == (QString) "SoftwareControl")
+        COMPORT->setFlowControl(QSerialPort::SoftwareControl);
+
+    COMPORT->clearError();
     COMPORT->open(QSerialPort::ReadWrite);
-    //    if (COMPORT->isOpen()) {
-    //        ui->cb_portNr->addItem(portInfo.portName());
-    //        COMPORT->close();
-    //    }
+
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
     COMPORT->close();
     delete COMPORT;
 }
-
