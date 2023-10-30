@@ -3,8 +3,8 @@
 
 #include <QDialog>
 #include <QSerialPortInfo>
-#include <QThread>
 #include <QSettings>
+#include <QThread>
 
 namespace Ui {
 class SerialDialog;
@@ -22,11 +22,22 @@ private slots:
 
     void on_cb_baudrate_currentIndexChanged(int index);
     void on_cb_databits_currentIndexChanged(int index);
+    void on_cb_direction_currentIndexChanged(int index);
+    void on_cb_flowcontrol_currentIndexChanged(int index);
+    void on_cb_parity_currentIndexChanged(int index);
+    void on_cb_stopbits_currentIndexChanged(int index);
+
+    void on_rb_terminal_clicked();
+    void on_rb_visualization_clicked();
+
+    void on_pb_cancel_clicked();
+    void on_pb_connect_clicked();
 
 private:
     Ui::SerialDialog *ui;
     void fill_cb_serialInfo();
     QStringList portInfoList;
+    bool ConnectionType = false; // false - terminal, true - visualisation
 };
 
 #endif // SERIALDIALOG_H

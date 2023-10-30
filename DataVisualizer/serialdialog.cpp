@@ -5,6 +5,21 @@
 SerialDialog::SerialDialog(QWidget *parent) : QDialog(parent), ui(new Ui::SerialDialog) {
     ui->setupUi(this);
     fill_cb_serialInfo();
+    ui->cb_baudrate->setCurrentText(MainWindow::getSettings("serial", "BaudRate"));
+    ui->cb_databits->setCurrentText(MainWindow::getSettings("serial", "DataBits"));
+    ui->cb_direction->setCurrentText(MainWindow::getSettings("serial", "Direction"));
+    ui->cb_flowcontrol->setCurrentText(MainWindow::getSettings("serial", "FlowControl"));
+    ui->cb_parity->setCurrentText(MainWindow::getSettings("serial", "Parity"));
+    ui->cb_stopbits->setCurrentText(MainWindow::getSettings("serial", "StopBits"));
+    ConnectionType = (bool)(MainWindow::getSettings("serial", "Terminal").toInt());
+    qInfo() << ConnectionType;
+    if (ConnectionType) {
+        ui->rb_terminal->setChecked(false);
+        ui->rb_visualization->setChecked(true);
+    } else {
+        ui->rb_terminal->setChecked(true);
+        ui->rb_visualization->setChecked(false);
+    }
 }
 
 SerialDialog::~SerialDialog() {
@@ -34,3 +49,35 @@ void SerialDialog::on_cb_databits_currentIndexChanged(int index) {
     MainWindow::setSettings("serial", "DataBits", ui->cb_databits->currentText());
 }
 
+void SerialDialog::on_cb_direction_currentIndexChanged(int index) {
+    MainWindow::setSettings("serial", "Direction", ui->cb_direction->currentText());
+}
+
+void SerialDialog::on_cb_flowcontrol_currentIndexChanged(int index) {
+    MainWindow::setSettings("serial", "FlowControl", ui->cb_flowcontrol->currentText());
+}
+
+void SerialDialog::on_cb_parity_currentIndexChanged(int index) {
+    MainWindow::setSettings("serial", "Parity", ui->cb_parity->currentText());
+}
+
+void SerialDialog::on_cb_stopbits_currentIndexChanged(int index) {
+    MainWindow::setSettings("serial", "StopBits", ui->cb_stopbits->currentText());
+}
+
+void SerialDialog::on_rb_terminal_clicked() {
+    MainWindow::setSettings("serial", "Terminal", "0");
+    ConnectionType = false;
+}
+
+void SerialDialog::on_rb_visualization_clicked() {
+    MainWindow::setSettings("serial", "Terminal", "1");
+    ConnectionType = true;
+}
+
+void SerialDialog::on_pb_cancel_clicked() {
+    this->close();
+}
+
+void SerialDialog::on_pb_connect_clicked() {
+}
