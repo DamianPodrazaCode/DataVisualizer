@@ -41,8 +41,9 @@ void SerialDialog::fill_cb_serialInfo() {
         COMPORT->open(QSerialPort::ReadWrite);
         if (COMPORT->isOpen()) {
             ui->cb_portNr->addItem(portInfo.portName());
-            COMPORT->close();
         }
+        COMPORT->close();
+        delete COMPORT;
     }
     ui->cb_portNr->model()->sort(0);
 }
@@ -101,6 +102,7 @@ void SerialDialog::on_pb_connect_clicked() {
         serialTerm->Parity = ui->cb_parity->currentText();
         serialTerm->StopBits = ui->cb_stopbits->currentText();
         serialTerm->show();
+        serialTerm->start();
         this->close();
     } else {
         QMessageBox::information(this, tr("WARNING!!!"), tr("No Serial Ports."));

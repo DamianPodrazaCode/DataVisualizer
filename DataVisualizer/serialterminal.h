@@ -2,6 +2,7 @@
 #define SERIALTERMINAL_H
 
 #include <QDialog>
+#include <QMetaEnum>
 #include <QSerialPort>
 
 namespace Ui {
@@ -23,8 +24,15 @@ public:
     QString Parity;
     QString StopBits;
 
+    void start();
+
+private slots:
+    void on_serialTerminal_rejected();
+
 private:
     Ui::serialTerminal *ui;
+
+    QSerialPort *COMPORT;
 };
 
 #endif // SERIALTERMINAL_H
