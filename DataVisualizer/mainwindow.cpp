@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
     QApplication::setApplicationName("Data Visualizer");
     MainWindow::setWindowTitle("Data Visualizer");
-    ui->lDebug->setText(QString("0x%1").arg((int64_t)QThread::currentThread(), 16));
+    //ui->lDebug->setText(QString("0x%1").arg((int64_t)QThread::currentThread(), 16));
 }
 
 MainWindow::~MainWindow() {

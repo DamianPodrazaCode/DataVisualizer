@@ -1,5 +1,6 @@
 #include "serialdialog.h"
 #include "mainwindow.h"
+#include "serialterminal.h"
 #include "ui_serialdialog.h"
 
 SerialDialog::SerialDialog(QWidget *parent) : QDialog(parent), ui(new Ui::SerialDialog) {
@@ -12,7 +13,7 @@ SerialDialog::SerialDialog(QWidget *parent) : QDialog(parent), ui(new Ui::Serial
     ui->cb_parity->setCurrentText(MainWindow::getSettings("serial", "Parity"));
     ui->cb_stopbits->setCurrentText(MainWindow::getSettings("serial", "StopBits"));
     ConnectionType = (bool)(MainWindow::getSettings("serial", "Terminal").toInt());
-    qInfo() << ConnectionType;
+    // qInfo() << ConnectionType;
     if (ConnectionType) {
         ui->rb_terminal->setChecked(false);
         ui->rb_visualization->setChecked(true);
@@ -32,6 +33,7 @@ void SerialDialog::fill_cb_serialInfo() {
         portInfoList.append(portInfo.portName() + ";" + portInfo.description() + ";" + portInfo.manufacturer() + ";"
                             + portInfo.serialNumber() + ";" + QString::number(portInfo.productIdentifier(), 16) + ";"
                             + QString::number(portInfo.vendorIdentifier(), 16) + ";" + portInfo.systemLocation());
+
         ui->cb_portNr->addItem(portInfo.portName());
     }
     ui->cb_portNr->model()->sort(0);
@@ -80,4 +82,14 @@ void SerialDialog::on_pb_cancel_clicked() {
 }
 
 void SerialDialog::on_pb_connect_clicked() {
+    if (ui->cb_portNr->count() > 0) {
+        SerialTerminal *serialTerm = new SerialTerminal();
+        serialTerm->setWindowTitle("Serial Terminal " + ui->cb_portNr->currentText());
+        //serialTerm->PortName =
+        serialTerm->show();
+        this->close();
+    } else {
+        QMessageBox::information(this, tr("WARNING!!!"), tr("No Serial Ports."));
+        this->close();
+    }
 }

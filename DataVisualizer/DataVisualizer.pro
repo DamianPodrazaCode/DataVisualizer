@@ -12,17 +12,20 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     networkdialog.cpp \
-    serialdialog.cpp
+    serialdialog.cpp \
+    serialterminal.cpp
 
 HEADERS += \
     mainwindow.h \
     networkdialog.h \
-    serialdialog.h
+    serialdialog.h \
+    serialterminal.h
 
 FORMS += \
     mainwindow.ui \
     networkdialog.ui \
-    serialdialog.ui
+    serialdialog.ui \
+    serialterminal.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
