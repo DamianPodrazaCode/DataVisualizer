@@ -34,7 +34,7 @@ void SerialDialog::fill_cb_serialInfo() {
                             + portInfo.serialNumber() + ";" + QString::number(portInfo.productIdentifier(), 16) + ";"
                             + QString::number(portInfo.vendorIdentifier(), 16) + ";" + portInfo.systemLocation());
 
-        // sprawdzenie czyu port otwary, jeżeli nie to dodanie do listy możliwych portów
+        // sprawdzenie czyu port otwarty, jeżeli nie to dodanie do listy możliwych portów
         QSerialPort *COMPORT = new QSerialPort();
         COMPORT->setPortName(portInfo.portName());
         COMPORT->clearError();
@@ -93,7 +93,13 @@ void SerialDialog::on_pb_connect_clicked() {
     if (ui->cb_portNr->count() > 0) {
         SerialTerminal *serialTerm = new SerialTerminal();
         serialTerm->setWindowTitle("Serial Terminal " + ui->cb_portNr->currentText());
-        //serialTerm->PortName =
+        serialTerm->PortName = ui->cb_portNr->currentText();
+        serialTerm->BaudRate = ui->cb_baudrate->currentText();
+        serialTerm->DataBits = ui->cb_databits->currentText();
+        serialTerm->Direction = ui->cb_direction->currentText();
+        serialTerm->FlowControl = ui->cb_flowcontrol->currentText();
+        serialTerm->Parity = ui->cb_parity->currentText();
+        serialTerm->StopBits = ui->cb_stopbits->currentText();
         serialTerm->show();
         this->close();
     } else {
