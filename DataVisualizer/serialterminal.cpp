@@ -93,11 +93,7 @@ void SerialTerminal::read_data() {
         while(COMPORT->bytesAvailable()) {
             dataFromSerial += COMPORT->readAll();
         }
-        if (dataFromSerial.at(dataFromSerial.length()-1) == char(10)){
-            ui->pte_read->appendPlainText(dataFromSerial);
-            dataFromSerial = "";
-        }
-
-
+        ui->pte_read->insertPlainText(dataFromSerial);
+        dataFromSerial = "";
     }
 }

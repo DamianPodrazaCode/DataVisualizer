@@ -164,6 +164,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="textInteractionFlags">
+         <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -253,6 +256,30 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cb_hiddenCRLF">
+              <property name="text">
+               <string>HiddenCRLF</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cb_CR_out">
+              <property name="text">
+               <string>CR(13)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cb_LF_out">
+              <property name="text">
+               <string>LF(10)</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
