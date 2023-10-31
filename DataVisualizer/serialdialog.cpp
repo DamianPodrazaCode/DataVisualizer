@@ -13,7 +13,6 @@ SerialDialog::SerialDialog(QWidget *parent) : QDialog(parent), ui(new Ui::Serial
     ui->cb_parity->setCurrentText(MainWindow::getSettings("serial", "Parity"));
     ui->cb_stopbits->setCurrentText(MainWindow::getSettings("serial", "StopBits"));
     ConnectionType = (bool)(MainWindow::getSettings("serial", "Terminal").toInt());
-    // qInfo() << ConnectionType;
     if (ConnectionType) {
         ui->rb_terminal->setChecked(false);
         ui->rb_visualization->setChecked(true);

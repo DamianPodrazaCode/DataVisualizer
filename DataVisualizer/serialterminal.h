@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QMetaEnum>
 #include <QSerialPort>
+#include <QThread>
+#include <QThreadPool>
 
 namespace Ui {
 class serialTerminal;
@@ -28,6 +30,8 @@ public:
 
 private slots:
     void on_serialTerminal_rejected();
+
+    void on_pb_send_clicked();
 
 private:
     Ui::serialTerminal *ui;

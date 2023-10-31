@@ -5,6 +5,7 @@
 #include <QFuture>
 #include <QMainWindow>
 #include <QThread>
+#include <QThreadPool>
 #include <QtConcurrent>
 #include <QSettings>
 

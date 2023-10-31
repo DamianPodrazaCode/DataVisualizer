@@ -49,14 +49,14 @@
           <item>
            <widget class="QCheckBox" name="cb_CR">
             <property name="text">
-             <string>CR</string>
+             <string>CR(13)</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="cb_LF">
             <property name="text">
-             <string>LF</string>
+             <string>LF(10)</string>
             </property>
            </widget>
           </item>

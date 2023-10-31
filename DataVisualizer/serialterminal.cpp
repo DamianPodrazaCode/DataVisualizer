@@ -53,9 +53,32 @@ void SerialTerminal::start() {
     COMPORT->clearError();
     COMPORT->open(QSerialPort::ReadWrite);
 
+    if (!COMPORT->isOpen()) {
+        COMPORT->close();
+        delete COMPORT;
+        close();
+    }
+
+    QThreadPool *threadPool = new QThreadPool(this);
+    threadPool->setMaxThreadCount(2);
+    threadPool->setExpiryTimeout(30000);
+
+
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
     COMPORT->close();
     delete COMPORT;
+}
+
+void SerialTerminal::on_pb_send_clicked() {
+    if (COMPORT->isOpen()) {
+        QString send = ui->le_send->text();
+        if (ui->cb_CR->isChecked())
+            send += char(13);
+        if (ui->cb_LF->isChecked())
+            send += char(10);
+        COMPORT->write(send.toLatin1());
+        COMPORT->flush();
+    }
 }
