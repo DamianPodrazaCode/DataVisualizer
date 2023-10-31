@@ -164,8 +164,20 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="cursorWidth">
+         <number>1</number>
+        </property>
         <property name="textInteractionFlags">
          <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+        </property>
+        <property name="maximumBlockCount">
+         <number>0</number>
+        </property>
+        <property name="backgroundVisible">
+         <bool>false</bool>
+        </property>
+        <property name="centerOnScroll">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -260,24 +272,7 @@
             <item>
              <widget class="QCheckBox" name="cb_hiddenCRLF">
               <property name="text">
-               <string>HiddenCRLF</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="cb_CR_out">
-              <property name="text">
-               <string>CR(13)</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="cb_LF_out">
-              <property name="text">
-               <string>LF(10)</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
+               <string>Show hidden CRLF</string>
               </property>
              </widget>
             </item>

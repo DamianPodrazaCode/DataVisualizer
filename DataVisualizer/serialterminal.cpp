@@ -81,19 +81,20 @@ void SerialTerminal::on_pb_send_clicked() {
 }
 
 void SerialTerminal::read_data() {
-    if(COMPORT->isOpen()) {
-//        while(COMPORT->bytesAvailable()) {
-//            dataFromSerial += COMPORT->readAll();
-//        }
-//        if (dataFromSerial.at(dataFromSerial.length()-1) == char(10)){
-//            ui->pte_read->appendPlainText(dataFromSerial);
-//            dataFromSerial = "";
-//        }
-
-        while(COMPORT->bytesAvailable()) {
+    if (COMPORT->isOpen()) {
+        while (COMPORT->bytesAvailable()) {
             dataFromSerial += COMPORT->readAll();
         }
-        ui->pte_read->insertPlainText(dataFromSerial);
-        dataFromSerial = "";
+        if (ui->cb_hiddenCRLF->isChecked()) {
+            dataFromSerial.replace(char(13), "[CR]");
+            dataFromSerial.replace(char(10), "[LF]\n");
+            ui->pte_read->insertPlainText(dataFromSerial);
+            dataFromSerial = "";
+        } else {
+            ui->pte_read->insertPlainText(dataFromSerial);
+            dataFromSerial = "";
+        }
+        if (ui->cb_rewind->isChecked())  //przewijanie wejścia
+            ui->pte_read->ensureCursorVisible();
     }
 }
