@@ -2,11 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QDebug>
-#include <QFuture>
 #include <QMainWindow>
-#include <QThread>
-#include <QThreadPool>
-#include <QtConcurrent>
 #include <QSettings>
 
 QT_BEGIN_NAMESPACE

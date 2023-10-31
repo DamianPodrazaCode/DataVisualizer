@@ -51,6 +51,7 @@ void SerialTerminal::start() {
         COMPORT->setFlowControl(QSerialPort::SoftwareControl);
 
     COMPORT->clearError();
+
     COMPORT->open(QSerialPort::ReadWrite);
 
     if (!COMPORT->isOpen()) {
@@ -59,11 +60,7 @@ void SerialTerminal::start() {
         close();
     }
 
-    QThreadPool *threadPool = new QThreadPool(this);
-    threadPool->setMaxThreadCount(2);
-    threadPool->setExpiryTimeout(30000);
-
-
+    connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
@@ -80,5 +77,27 @@ void SerialTerminal::on_pb_send_clicked() {
             send += char(10);
         COMPORT->write(send.toLatin1());
         COMPORT->flush();
+    }
+}
+
+void SerialTerminal::read_data() {
+    if(COMPORT->isOpen()) {
+//        while(COMPORT->bytesAvailable()) {
+//            dataFromSerial += COMPORT->readAll();
+//        }
+//        if (dataFromSerial.at(dataFromSerial.length()-1) == char(10)){
+//            ui->pte_read->appendPlainText(dataFromSerial);
+//            dataFromSerial = "";
+//        }
+
+        while(COMPORT->bytesAvailable()) {
+            dataFromSerial += COMPORT->readAll();
+        }
+        if (dataFromSerial.at(dataFromSerial.length()-1) == char(10)){
+            ui->pte_read->appendPlainText(dataFromSerial);
+            dataFromSerial = "";
+        }
+
+
     }
 }

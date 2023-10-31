@@ -2,10 +2,7 @@
 #define SERIALTERMINAL_H
 
 #include <QDialog>
-#include <QMetaEnum>
 #include <QSerialPort>
-#include <QThread>
-#include <QThreadPool>
 
 namespace Ui {
 class serialTerminal;
@@ -30,13 +27,14 @@ public:
 
 private slots:
     void on_serialTerminal_rejected();
-
     void on_pb_send_clicked();
+    void read_data();
 
 private:
     Ui::serialTerminal *ui;
-
     QSerialPort *COMPORT;
+    QString dataFromSerial;
+    bool dataReady = false;
 };
 
 #endif // SERIALTERMINAL_H

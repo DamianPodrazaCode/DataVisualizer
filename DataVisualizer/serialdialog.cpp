@@ -102,6 +102,7 @@ void SerialDialog::on_pb_connect_clicked() {
         serialTerm->StopBits = ui->cb_stopbits->currentText();
         serialTerm->show();
         serialTerm->start();
+
         this->close();
     } else {
         QMessageBox::information(this, tr("WARNING!!!"), tr("No Serial Ports."));

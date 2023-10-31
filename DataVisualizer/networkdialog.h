@@ -2,7 +2,6 @@
 #define NETWORKDIALOG_H
 
 #include <QDialog>
-#include <QThread>
 
 namespace Ui {
 class NetworkDialog;
