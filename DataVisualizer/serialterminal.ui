@@ -51,12 +51,18 @@
             <property name="text">
              <string>CR(13)</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="cb_LF">
             <property name="text">
              <string>LF(10)</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -192,6 +198,9 @@
               <property name="text">
                <string>ASCII</string>
               </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item>
@@ -215,6 +224,9 @@
             <property name="text">
              <string>Warp Lines</string>
             </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -225,6 +237,9 @@
            <widget class="QCheckBox" name="cb_rewind">
             <property name="text">
              <string>Rewind</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

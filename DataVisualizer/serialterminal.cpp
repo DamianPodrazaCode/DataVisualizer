@@ -5,6 +5,7 @@ SerialTerminal::SerialTerminal(QWidget *parent) : QDialog(parent), ui(new Ui::se
     ui->setupUi(this);
     setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint
                    | Qt::WindowCloseButtonHint);
+
 }
 
 SerialTerminal::~SerialTerminal() {
