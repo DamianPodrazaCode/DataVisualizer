@@ -170,6 +170,11 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+         </font>
+        </property>
         <property name="inputMethodHints">
          <set>Qt::ImhNone</set>
         </property>
@@ -245,7 +250,7 @@
             <item>
              <widget class="QCheckBox" name="cb_rewind">
               <property name="text">
-               <string>Rewind</string>
+               <string>Auto scroll</string>
               </property>
               <property name="checked">
                <bool>true</bool>
@@ -285,7 +290,7 @@
             <item>
              <widget class="QCheckBox" name="cb_hiddenCRLF">
               <property name="text">
-               <string>Show hidden CRLF</string>
+               <string>Show CR LF</string>
               </property>
              </widget>
             </item>

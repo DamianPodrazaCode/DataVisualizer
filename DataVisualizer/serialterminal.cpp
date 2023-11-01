@@ -82,25 +82,25 @@ void SerialTerminal::on_pb_send_clicked() {
 }
 
 void SerialTerminal::read_data() {
-    if (COMPORT->isOpen()) {
-        while (COMPORT->bytesAvailable()) {
-            dataFromSerial += COMPORT->readAll();
-        }
-        if (!ui->pb_startStop->isChecked()) {
-            if (ui->cb_hiddenCRLF->isChecked()) {
-                dataFromSerial.replace(char(13), "[CR]");
-                dataFromSerial.replace(char(10), "[LF]\n");
-                ui->pte_read->insertPlainText(dataFromSerial);
-            } else {
-                dataFromSerial.replace(char(13), "");
-                dataFromSerial.replace(char(10), "\n");
-                ui->pte_read->insertPlainText(dataFromSerial);
-            }
-            if (ui->cb_rewind->isChecked()) // przewijanie wejścia
-                ui->pte_read->ensureCursorVisible();
-        }
-        dataFromSerial.clear();
-    }
+//    if (COMPORT->isOpen()) {
+//        while (COMPORT->bytesAvailable()) {
+//            dataFromSerial += COMPORT->read(1);
+//        }
+//        if (!ui->pb_startStop->isChecked()) {
+//            if (ui->cb_hiddenCRLF->isChecked()) {
+//                dataFromSerial.replace(char(13), "[CR]");
+//                dataFromSerial.replace(char(10), "[LF]\n");
+//                ui->pte_read->insertPlainText(dataFromSerial);
+//            } else {
+//                dataFromSerial.replace(char(13), "");
+//                dataFromSerial.replace(char(10), "\n");
+//                ui->pte_read->insertPlainText(dataFromSerial);
+//            }
+//            if (ui->cb_rewind->isChecked()) // przewijanie wejścia
+//                ui->pte_read->ensureCursorVisible();
+//        }
+//        dataFromSerial.clear();
+//    }
 }
 
 void SerialTerminal::on_pb_clear_read_clicked() {

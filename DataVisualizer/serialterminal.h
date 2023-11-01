@@ -38,7 +38,7 @@ private:
     Ui::serialTerminal *ui;
     QSerialPort *COMPORT;
     QString dataFromSerial;
-    bool dataReady = false;
+   // bool dataReady = false;
 };
 
 #endif // SERIALTERMINAL_H
