@@ -29,8 +29,8 @@ private slots:
     void on_serialTerminal_rejected();
     void on_pb_send_clicked();
     void read_data();
-
     void on_pb_clear_read_clicked();
+    void on_pb_startStop_toggled(bool checked);
 
 private:
     Ui::serialTerminal *ui;
