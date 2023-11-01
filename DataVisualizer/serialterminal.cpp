@@ -12,6 +12,7 @@ SerialTerminal::~SerialTerminal() {
 }
 
 void SerialTerminal::start() {
+
     COMPORT = new QSerialPort();
     COMPORT->setPortName(PortName);
     COMPORT->setBaudRate(BaudRate.toInt());
@@ -85,22 +86,39 @@ void SerialTerminal::read_data() {
         while (COMPORT->bytesAvailable()) {
             dataFromSerial += COMPORT->readAll();
         }
-        if (ui->cb_hiddenCRLF->isChecked()) {
-            dataFromSerial.replace(char(13), "[CR]");
-            dataFromSerial.replace(char(10), "[LF]\n");
-            ui->pte_read->insertPlainText(dataFromSerial);
-            dataFromSerial.clear();
-        } else {
-            dataFromSerial.replace(char(13), "");
-            dataFromSerial.replace(char(10), "\n");
-            ui->pte_read->insertPlainText(dataFromSerial);
-            dataFromSerial.clear();
+        if (!ui->pb_startStop->isChecked()) {
+            if (ui->cb_hiddenCRLF->isChecked()) {
+                dataFromSerial.replace(char(13), "[CR]");
+                dataFromSerial.replace(char(10), "[LF]\n");
+                ui->pte_read->insertPlainText(dataFromSerial);
+            } else {
+                dataFromSerial.replace(char(13), "");
+                dataFromSerial.replace(char(10), "\n");
+                ui->pte_read->insertPlainText(dataFromSerial);
+            }
+            if (ui->cb_rewind->isChecked()) // przewijanie wejścia
+                ui->pte_read->ensureCursorVisible();
         }
-        if (ui->cb_rewind->isChecked()) // przewijanie wejścia
-            ui->pte_read->ensureCursorVisible();
+        dataFromSerial.clear();
     }
 }
 
 void SerialTerminal::on_pb_clear_read_clicked() {
     ui->pte_read->clear();
+}
+
+void SerialTerminal::on_pb_startStop_toggled(bool checked) {
+    if (checked) {
+        ui->pb_startStop->setText("Start");
+    } else {
+        ui->pb_startStop->setText("Stop");
+    }
+}
+
+void SerialTerminal::on_cb_autoDelete_toggled(bool checked) {
+    if (checked) {
+        ui->pte_read->setMaximumBlockCount(ui->le_lineCount->text().toInt());
+    } else {
+        ui->pte_read->setMaximumBlockCount(0);
+    }
 }

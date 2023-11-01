@@ -213,15 +213,12 @@
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QCheckBox" name="cb_hex">
-              <property name="text">
-               <string>HEX</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QCheckBox" name="cb_warp">
             <property name="text">
@@ -229,6 +226,13 @@
             </property>
             <property name="checked">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cb_hex">
+            <property name="text">
+             <string>HEX</string>
             </property>
            </widget>
           </item>
@@ -252,6 +256,16 @@
              <widget class="QPushButton" name="pb_clear_read">
               <property name="text">
                <string>Clear</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_startStop">
+              <property name="text">
+               <string>Stop</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -300,7 +314,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="le_lineCount"/>
+             <widget class="QLineEdit" name="le_lineCount">
+              <property name="text">
+               <string>10</string>
+              </property>
+             </widget>
             </item>
             <item>
              <spacer name="horizontalSpacer">

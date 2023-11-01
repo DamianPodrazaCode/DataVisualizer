@@ -32,6 +32,8 @@ private slots:
     void on_pb_clear_read_clicked();
     void on_pb_startStop_toggled(bool checked);
 
+    void on_cb_autoDelete_toggled(bool checked);
+
 private:
     Ui::serialTerminal *ui;
     QSerialPort *COMPORT;
