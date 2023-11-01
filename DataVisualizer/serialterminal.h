@@ -30,6 +30,8 @@ private slots:
     void on_pb_send_clicked();
     void read_data();
 
+    void on_pb_clear_read_clicked();
+
 private:
     Ui::serialTerminal *ui;
     QSerialPort *COMPORT;

@@ -5,7 +5,6 @@ SerialTerminal::SerialTerminal(QWidget *parent) : QDialog(parent), ui(new Ui::se
     ui->setupUi(this);
     setWindowFlags(windowFlags() | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint
                    | Qt::WindowCloseButtonHint);
-
 }
 
 SerialTerminal::~SerialTerminal() {
@@ -90,12 +89,18 @@ void SerialTerminal::read_data() {
             dataFromSerial.replace(char(13), "[CR]");
             dataFromSerial.replace(char(10), "[LF]\n");
             ui->pte_read->insertPlainText(dataFromSerial);
-            dataFromSerial = "";
+            dataFromSerial.clear();
         } else {
+            dataFromSerial.replace(char(13), "");
+            dataFromSerial.replace(char(10), "\n");
             ui->pte_read->insertPlainText(dataFromSerial);
-            dataFromSerial = "";
+            dataFromSerial.clear();
         }
-        if (ui->cb_rewind->isChecked())  //przewijanie wejścia
+        if (ui->cb_rewind->isChecked()) // przewijanie wejścia
             ui->pte_read->ensureCursorVisible();
     }
+}
+
+void SerialTerminal::on_pb_clear_read_clicked() {
+    ui->pte_read->clear();
 }

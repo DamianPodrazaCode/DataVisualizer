@@ -174,10 +174,10 @@
          <set>Qt::ImhNone</set>
         </property>
         <property name="cursorWidth">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="textInteractionFlags">
-         <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         <set>Qt::TextBrowserInteraction</set>
         </property>
         <property name="maximumBlockCount">
          <number>0</number>
@@ -237,24 +237,55 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QCheckBox" name="cb_rewind">
-            <property name="text">
-             <string>Rewind</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cb_autoDelete">
-            <property name="text">
-             <string>Auto Delete</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QCheckBox" name="cb_rewind">
+              <property name="text">
+               <string>Rewind</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pb_clear_read">
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cb_hiddenCRLF">
+              <property name="text">
+               <string>Show hidden CRLF</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="cb_autoDelete">
+              <property name="text">
+               <string>Auto Delete</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QLabel" name="label">
               <property name="sizePolicy">
@@ -286,13 +317,6 @@
                </size>
               </property>
              </spacer>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="cb_hiddenCRLF">
-              <property name="text">
-               <string>Show hidden CRLF</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </item>
