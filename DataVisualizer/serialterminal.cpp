@@ -122,3 +122,11 @@ void SerialTerminal::on_cb_autoDelete_toggled(bool checked) {
         ui->pte_read->setMaximumBlockCount(0);
     }
 }
+
+void SerialTerminal::on_cb_warp_toggled(bool checked) {
+    if (checked) {
+        ui->pte_read->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+    } else {
+        ui->pte_read->setLineWrapMode(QPlainTextEdit::NoWrap);
+    }
+}

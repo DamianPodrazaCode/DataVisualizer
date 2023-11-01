@@ -31,8 +31,8 @@ private slots:
     void read_data();
     void on_pb_clear_read_clicked();
     void on_pb_startStop_toggled(bool checked);
-
     void on_cb_autoDelete_toggled(bool checked);
+    void on_cb_warp_toggled(bool checked);
 
 private:
     Ui::serialTerminal *ui;

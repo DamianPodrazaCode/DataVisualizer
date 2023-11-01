@@ -197,7 +197,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout">
             <item>
-             <widget class="QCheckBox" name="cb_ascii">
+             <widget class="QRadioButton" name="cb_ascii">
               <property name="text">
                <string>ASCII</string>
               </property>
@@ -207,9 +207,16 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="cb_utf8">
+             <widget class="QRadioButton" name="cb_utf8">
               <property name="text">
                <string>UTF8</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="cb_hex">
+              <property name="text">
+               <string>HEX</string>
               </property>
              </widget>
             </item>
@@ -226,13 +233,6 @@
             </property>
             <property name="checked">
              <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cb_hex">
-            <property name="text">
-             <string>HEX</string>
             </property>
            </widget>
           </item>
