@@ -37,7 +37,7 @@ private slots:
 private:
     Ui::serialTerminal *ui;
     QSerialPort *COMPORT;
-    QString dataFromSerial;
+    QByteArray dataFromSerial;
    // bool dataReady = false;
 };
 

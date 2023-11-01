@@ -82,25 +82,43 @@ void SerialTerminal::on_pb_send_clicked() {
 }
 
 void SerialTerminal::read_data() {
-//    if (COMPORT->isOpen()) {
-//        while (COMPORT->bytesAvailable()) {
-//            dataFromSerial += COMPORT->read(1);
-//        }
-//        if (!ui->pb_startStop->isChecked()) {
-//            if (ui->cb_hiddenCRLF->isChecked()) {
-//                dataFromSerial.replace(char(13), "[CR]");
-//                dataFromSerial.replace(char(10), "[LF]\n");
-//                ui->pte_read->insertPlainText(dataFromSerial);
-//            } else {
-//                dataFromSerial.replace(char(13), "");
-//                dataFromSerial.replace(char(10), "\n");
-//                ui->pte_read->insertPlainText(dataFromSerial);
-//            }
-//            if (ui->cb_rewind->isChecked()) // przewijanie wejścia
-//                ui->pte_read->ensureCursorVisible();
-//        }
-//        dataFromSerial.clear();
-//    }
+    if (COMPORT->isOpen()) {
+        if (COMPORT->bytesAvailable()) {
+            dataFromSerial.append(COMPORT->readAll());
+        }
+        if (dataFromSerial.contains(char(10))) {
+            QString lineShow = dataFromSerial.left(dataFromSerial.indexOf(char(10)) + 1);
+            dataFromSerial.remove(0, dataFromSerial.indexOf(char(10)) + 1);
+
+            if (!ui->pb_startStop->isChecked()) {
+                if (ui->cb_utf8->isChecked()) {
+                    if (ui->cb_hiddenCRLF->isChecked()) {
+                        lineShow.replace(char(13), "[CR]");
+                        lineShow.replace(char(10), "[LF]\n");
+                    } else {
+                        lineShow.replace(char(13), "");
+                        lineShow.replace(char(10), "\n");
+                    }
+                    ui->pte_read->insertPlainText(lineShow.toUtf8());
+                }
+                if (ui->cb_ascii->isChecked()) {
+                    if (ui->cb_hiddenCRLF->isChecked()) {
+                        lineShow.replace(char(13), "[CR]");
+                        lineShow.replace(char(10), "[LF]\n");
+                    } else {
+                        lineShow.replace(char(13), "");
+                        lineShow.replace(char(10), "\n");
+                    }
+                    ui->pte_read->insertPlainText(lineShow.toLatin1());
+                }
+                if (ui->cb_hex->isChecked()) {
+                    QByteArray bytes(lineShow.toUtf8());
+                    QString hexLine = bytes.toHex(' ') + "\n";
+                    ui->pte_read->insertPlainText(hexLine);
+                }
+            }
+        }
+    }
 }
 
 void SerialTerminal::on_pb_clear_read_clicked() {
