@@ -170,6 +170,9 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
         <property name="cursorWidth">
          <number>1</number>
         </property>
