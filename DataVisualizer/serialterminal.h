@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSerialPort>
+#include <QThread>
 
 namespace Ui {
 class serialTerminal;
@@ -24,6 +25,10 @@ public:
     QString StopBits;
 
     void start();
+    static void taskControlSignals(QSerialPort *port, uint16_t *data);
+
+signals:
+    void showDataControl_SIGNAL(QString str);
 
 private slots:
     void on_serialTerminal_rejected();
@@ -33,11 +38,19 @@ private slots:
     void on_pb_startStop_toggled(bool checked);
     void on_cb_autoDelete_toggled(bool checked);
     void on_cb_warp_toggled(bool checked);
+    void on_pb_RTS_toggled(bool checked);
+    void on_pb_DTR_toggled(bool checked);
+    void on_le_send_returnPressed();
+    void showDataControl(QString str);
+
+    void on_le_lineCount_returnPressed();
 
 private:
     Ui::serialTerminal *ui;
     QSerialPort *COMPORT;
     QByteArray dataFromSerial;
+    uint16_t dataControlSignal;
+    QThread *task;
    // bool dataReady = false;
 };
 

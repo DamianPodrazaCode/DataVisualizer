@@ -12,6 +12,14 @@ SerialTerminal::~SerialTerminal() {
     delete ui;
 }
 
+// void SerialTerminal::taskControlSignals(QSerialPort *port, uint16_t *data) {
+//     while (1) {
+//         *data = port->pinoutSignals();
+//         QThread::msleep(10);
+//         //emit showDataControl_SIGNAL(QString::number(*data));
+//     }
+// }
+
 void SerialTerminal::start() {
 
     ui->cb_CR->setChecked(MainWindow::getSettings("Serial Terminal", "inCR").toInt());
@@ -24,6 +32,7 @@ void SerialTerminal::start() {
     ui->cb_autoDelete->setChecked(MainWindow::getSettings("Serial Terminal", "AutoDelete").toInt());
     ui->le_lineCount->setText(MainWindow::getSettings("Serial Terminal", "LineCount"));
     ui->cb_hiddenCRLF->setChecked(MainWindow::getSettings("Serial Terminal", "ShowCRLF").toInt());
+    ui->pte_read->setMaximumBlockCount(ui->le_lineCount->text().toInt());
 
     COMPORT = new QSerialPort();
     COMPORT->setPortName(PortName);
@@ -73,7 +82,11 @@ void SerialTerminal::start() {
         close();
     }
 
+    //    task = QThread::create(taskControlSignals, COMPORT, &dataControlSignal);
+    //    task->start();
+
     connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
+    // connect(this, SIGNAL(showDataControl_SIGNAL()), this, SLOT(showDataControl()));
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
@@ -88,6 +101,7 @@ void SerialTerminal::on_serialTerminal_rejected() {
     MainWindow::setSettings("Serial Terminal", "LineCount", ui->le_lineCount->text());
     MainWindow::setSettings("Serial Terminal", "ShowCRLF", QString::number(ui->cb_hiddenCRLF->isChecked()));
 
+    // task->terminate();
     COMPORT->close();
     delete COMPORT;
 }
@@ -145,6 +159,7 @@ void SerialTerminal::read_data() {
             }
         }
     }
+    // COMPORT->pinoutSignals();
 }
 
 void SerialTerminal::on_pb_clear_read_clicked() {
@@ -173,4 +188,24 @@ void SerialTerminal::on_cb_warp_toggled(bool checked) {
     } else {
         ui->pte_read->setLineWrapMode(QPlainTextEdit::NoWrap);
     }
+}
+
+void SerialTerminal::on_pb_RTS_toggled(bool checked) {
+    COMPORT->setRequestToSend(checked);
+}
+
+void SerialTerminal::on_pb_DTR_toggled(bool checked) {
+    COMPORT->setDataTerminalReady(checked);
+}
+
+void SerialTerminal::on_le_send_returnPressed() {
+    on_pb_send_clicked();
+}
+
+void SerialTerminal::showDataControl(QString str) {
+    ui->le_send->setText(str);
+}
+
+void SerialTerminal::on_le_lineCount_returnPressed() {
+    ui->pte_read->setMaximumBlockCount(ui->le_lineCount->text().toInt());
 }
