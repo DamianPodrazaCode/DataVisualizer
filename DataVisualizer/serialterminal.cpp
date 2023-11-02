@@ -1,4 +1,5 @@
 #include "serialterminal.h"
+#include "mainwindow.h"
 #include "ui_serialterminal.h"
 
 SerialTerminal::SerialTerminal(QWidget *parent) : QDialog(parent), ui(new Ui::serialTerminal) {
@@ -12,6 +13,17 @@ SerialTerminal::~SerialTerminal() {
 }
 
 void SerialTerminal::start() {
+
+    MainWindow::getSettings("Serial Terminal", "inCR");
+    MainWindow::getSettings("Serial Terminal", "inLF");
+    MainWindow::getSettings("Serial Terminal", "ASCII");
+    MainWindow::getSettings("Serial Terminal", "UTF8");
+    MainWindow::getSettings("Serial Terminal", "HEX");
+    MainWindow::getSettings("Serial Terminal", "WARP");
+    MainWindow::getSettings("Serial Terminal", "AutoScroll");
+    MainWindow::getSettings("Serial Terminal", "AutoDelete");
+    MainWindow::getSettings("Serial Terminal", "LineCount");
+    MainWindow::getSettings("Serial Terminal", "ShowCRLF");
 
     COMPORT = new QSerialPort();
     COMPORT->setPortName(PortName);
@@ -65,6 +77,17 @@ void SerialTerminal::start() {
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
+    MainWindow::setSettings("Serial Terminal", "inCR", QString::number(ui->cb_CR->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "inLF", QString::number(ui->cb_LF->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "ASCII", QString::number(ui->cb_ascii->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "UTF8", QString::number(ui->cb_utf8->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "HEX", QString::number(ui->cb_hex->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "WARP", QString::number(ui->cb_warp->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "AutoScroll", QString::number(ui->cb_rewind->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "AutoDelete", QString::number(ui->cb_autoDelete->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "LineCount", ui->le_lineCount->text());
+    MainWindow::setSettings("Serial Terminal", "ShowCRLF", QString::number(ui->cb_hiddenCRLF->isChecked()));
+
     COMPORT->close();
     delete COMPORT;
 }
@@ -116,6 +139,9 @@ void SerialTerminal::read_data() {
                     QString hexLine = bytes.toHex(' ') + "\n";
                     ui->pte_read->insertPlainText(hexLine);
                 }
+            }
+            if (ui->cb_rewind->isChecked()) {
+                 ui->pte_read->ensureCursorVisible();
             }
         }
     }
