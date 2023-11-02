@@ -14,16 +14,16 @@ SerialTerminal::~SerialTerminal() {
 
 void SerialTerminal::start() {
 
-    MainWindow::getSettings("Serial Terminal", "inCR");
-    MainWindow::getSettings("Serial Terminal", "inLF");
-    MainWindow::getSettings("Serial Terminal", "ASCII");
-    MainWindow::getSettings("Serial Terminal", "UTF8");
-    MainWindow::getSettings("Serial Terminal", "HEX");
-    MainWindow::getSettings("Serial Terminal", "WARP");
-    MainWindow::getSettings("Serial Terminal", "AutoScroll");
-    MainWindow::getSettings("Serial Terminal", "AutoDelete");
-    MainWindow::getSettings("Serial Terminal", "LineCount");
-    MainWindow::getSettings("Serial Terminal", "ShowCRLF");
+    ui->cb_CR->setChecked(MainWindow::getSettings("Serial Terminal", "inCR").toInt());
+    ui->cb_LF->setChecked(MainWindow::getSettings("Serial Terminal", "inLF").toInt());
+    ui->cb_ascii->setChecked(MainWindow::getSettings("Serial Terminal", "ASCII").toInt());
+    ui->cb_utf8->setChecked(MainWindow::getSettings("Serial Terminal", "UTF8").toInt());
+    ui->cb_hex->setChecked(MainWindow::getSettings("Serial Terminal", "HEX").toInt());
+    ui->cb_warp->setChecked(MainWindow::getSettings("Serial Terminal", "WARP").toInt());
+    ui->cb_rewind->setChecked(MainWindow::getSettings("Serial Terminal", "AutoScroll").toInt());
+    ui->cb_autoDelete->setChecked(MainWindow::getSettings("Serial Terminal", "AutoDelete").toInt());
+    ui->le_lineCount->setText(MainWindow::getSettings("Serial Terminal", "LineCount"));
+    ui->cb_hiddenCRLF->setChecked(MainWindow::getSettings("Serial Terminal", "ShowCRLF").toInt());
 
     COMPORT = new QSerialPort();
     COMPORT->setPortName(PortName);
@@ -141,7 +141,7 @@ void SerialTerminal::read_data() {
                 }
             }
             if (ui->cb_rewind->isChecked()) {
-                 ui->pte_read->ensureCursorVisible();
+                ui->pte_read->ensureCursorVisible();
             }
         }
     }
