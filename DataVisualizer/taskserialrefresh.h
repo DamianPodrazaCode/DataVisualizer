@@ -9,7 +9,8 @@ class TaskSerialRefresh : public QThread {
 
 public:
     explicit TaskSerialRefresh(QObject *parent = nullptr);
-    void run() override; // nadpisanie metody z QThread
+    void run() override;
+    bool on_off = false;
 
 signals:
      void updateSerial_SIGNAL();

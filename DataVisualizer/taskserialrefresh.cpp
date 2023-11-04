@@ -4,8 +4,8 @@ TaskSerialRefresh::TaskSerialRefresh(QObject *parent) : QThread{parent} {
 }
 
 void TaskSerialRefresh::run() {
-    while (1) {
+    while (on_off) {
         emit updateSerial_SIGNAL();
-        QThread::msleep(500);
+        QThread::msleep(50);
     }
 }

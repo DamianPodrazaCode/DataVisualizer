@@ -74,10 +74,11 @@ void SerialTerminal::start() {
         delete COMPORT;
         close();
     }
+    connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
 
     taskSerialSignals = new TaskSerialRefresh(this);
-    connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
     connect(taskSerialSignals, SIGNAL(updateSerial_SIGNAL()), this, SLOT(updateSerial()));
+    taskSerialSignals->on_off = true;
     taskSerialSignals->start();
 }
 
@@ -93,7 +94,7 @@ void SerialTerminal::on_serialTerminal_rejected() {
     MainWindow::setSettings("Serial Terminal", "LineCount", ui->le_lineCount->text());
     MainWindow::setSettings("Serial Terminal", "ShowCRLF", QString::number(ui->cb_hiddenCRLF->isChecked()));
 
-    taskSerialSignals->terminate();
+    taskSerialSignals->on_off = false;
     COMPORT->close();
     delete COMPORT;
 }
@@ -198,5 +199,17 @@ void SerialTerminal::on_le_lineCount_returnPressed() {
 }
 
 void SerialTerminal::updateSerial() {
-    qInfo() << COMPORT->pinoutSignals();
+    dataControlSignal = COMPORT->pinoutSignals();
+    if ((0xffff & QSerialPort::PinoutSignal::RingIndicatorSignal) & dataControlSignal) {
+        // qInfo() << "RingIndicatorSignal";
+    }
+    if ((0xffff & QSerialPort::PinoutSignal::DataCarrierDetectSignal) & dataControlSignal) {
+        // qInfo() << "DataCarrierDetectSignal";
+    }
+    if ((0xffff & QSerialPort::PinoutSignal::DataSetReadySignal) & dataControlSignal) {
+        // qInfo() << "DataSetReadySignal";
+    }
+    if ((0xffff & QSerialPort::PinoutSignal::ClearToSendSignal) & dataControlSignal) {
+        // qInfo() << "ClearToSendSignal";
+    }
 }
