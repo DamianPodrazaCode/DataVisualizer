@@ -201,15 +201,23 @@ void SerialTerminal::on_le_lineCount_returnPressed() {
 void SerialTerminal::updateSerial() {
     dataControlSignal = COMPORT->pinoutSignals();
     if ((0xffff & QSerialPort::PinoutSignal::RingIndicatorSignal) & dataControlSignal) {
-        // qInfo() << "RingIndicatorSignal";
+        ui->l_RI->setStyleSheet("background-color: rgba(255,0,0,255)");
+    } else {
+        ui->l_RI->setStyleSheet("background-color: rgba(255,0,0,0)");
     }
     if ((0xffff & QSerialPort::PinoutSignal::DataCarrierDetectSignal) & dataControlSignal) {
-        // qInfo() << "DataCarrierDetectSignal";
+        ui->l_CD->setStyleSheet("background-color: rgba(255,0,0,255)");
+    } else {
+        ui->l_CD->setStyleSheet("background-color: rgba(255,0,0,0)");
     }
     if ((0xffff & QSerialPort::PinoutSignal::DataSetReadySignal) & dataControlSignal) {
-        // qInfo() << "DataSetReadySignal";
+        ui->l_DSR->setStyleSheet("background-color: rgba(255,0,0,255)");
+    } else {
+        ui->l_DSR->setStyleSheet("background-color: rgba(255,0,0,0)");
     }
     if ((0xffff & QSerialPort::PinoutSignal::ClearToSendSignal) & dataControlSignal) {
-        // qInfo() << "ClearToSendSignal";
+        ui->l_CTS->setStyleSheet("background-color: rgba(255,0,0,255)");
+    } else {
+        ui->l_CTS->setStyleSheet("background-color: rgba(255,0,0,0)");
     }
 }
