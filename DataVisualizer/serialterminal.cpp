@@ -1,5 +1,6 @@
 #include "serialterminal.h"
 #include "mainwindow.h"
+
 #include "ui_serialterminal.h"
 
 SerialTerminal::SerialTerminal(QWidget *parent) : QDialog(parent), ui(new Ui::serialTerminal) {
@@ -11,14 +12,6 @@ SerialTerminal::SerialTerminal(QWidget *parent) : QDialog(parent), ui(new Ui::se
 SerialTerminal::~SerialTerminal() {
     delete ui;
 }
-
-// void SerialTerminal::taskControlSignals(QSerialPort *port, uint16_t *data) {
-//     while (1) {
-//         *data = port->pinoutSignals();
-//         QThread::msleep(10);
-//         //emit showDataControl_SIGNAL(QString::number(*data));
-//     }
-// }
 
 void SerialTerminal::start() {
 
@@ -82,11 +75,10 @@ void SerialTerminal::start() {
         close();
     }
 
-    //    task = QThread::create(taskControlSignals, COMPORT, &dataControlSignal);
-    //    task->start();
-
+    taskSerialSignals = new TaskSerialRefresh(this);
     connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
-    // connect(this, SIGNAL(showDataControl_SIGNAL()), this, SLOT(showDataControl()));
+    connect(taskSerialSignals, SIGNAL(updateSerial_SIGNAL()), this, SLOT(updateSerial()));
+    taskSerialSignals->start();
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
@@ -101,7 +93,7 @@ void SerialTerminal::on_serialTerminal_rejected() {
     MainWindow::setSettings("Serial Terminal", "LineCount", ui->le_lineCount->text());
     MainWindow::setSettings("Serial Terminal", "ShowCRLF", QString::number(ui->cb_hiddenCRLF->isChecked()));
 
-    // task->terminate();
+    taskSerialSignals->terminate();
     COMPORT->close();
     delete COMPORT;
 }
@@ -159,7 +151,6 @@ void SerialTerminal::read_data() {
             }
         }
     }
-    // COMPORT->pinoutSignals();
 }
 
 void SerialTerminal::on_pb_clear_read_clicked() {
@@ -202,10 +193,10 @@ void SerialTerminal::on_le_send_returnPressed() {
     on_pb_send_clicked();
 }
 
-void SerialTerminal::showDataControl(QString str) {
-    ui->le_send->setText(str);
-}
-
 void SerialTerminal::on_le_lineCount_returnPressed() {
     ui->pte_read->setMaximumBlockCount(ui->le_lineCount->text().toInt());
+}
+
+void SerialTerminal::updateSerial() {
+    qInfo() << COMPORT->pinoutSignals();
 }
