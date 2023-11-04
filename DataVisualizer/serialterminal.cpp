@@ -1,6 +1,5 @@
 #include "serialterminal.h"
 #include "mainwindow.h"
-
 #include "ui_serialterminal.h"
 
 SerialTerminal::SerialTerminal(QWidget *parent) : QDialog(parent), ui(new Ui::serialTerminal) {
@@ -76,10 +75,9 @@ void SerialTerminal::start() {
     }
     connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
 
-    taskSerialSignals = new TaskSerialRefresh(this);
-    connect(taskSerialSignals, SIGNAL(updateSerial_SIGNAL()), this, SLOT(updateSerial()));
-    taskSerialSignals->on_off = true;
-    taskSerialSignals->start();
+    timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateSerial()));
+    timer->start(100);
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
@@ -93,8 +91,8 @@ void SerialTerminal::on_serialTerminal_rejected() {
     MainWindow::setSettings("Serial Terminal", "AutoDelete", QString::number(ui->cb_autoDelete->isChecked()));
     MainWindow::setSettings("Serial Terminal", "LineCount", ui->le_lineCount->text());
     MainWindow::setSettings("Serial Terminal", "ShowCRLF", QString::number(ui->cb_hiddenCRLF->isChecked()));
-
-    taskSerialSignals->on_off = false;
+    timer->stop();
+    delete timer;
     COMPORT->close();
     delete COMPORT;
 }
@@ -112,6 +110,7 @@ void SerialTerminal::on_pb_send_clicked() {
 }
 
 void SerialTerminal::read_data() {
+    timer->stop();  // trzeba zatrzymać timer i przestać odczytywać piny FlowControl bop nie można odczytywać podwójnie portu.
     if (COMPORT->isOpen()) {
         if (COMPORT->bytesAvailable()) {
             dataFromSerial.append(COMPORT->readAll());
@@ -152,6 +151,7 @@ void SerialTerminal::read_data() {
             }
         }
     }
+    timer->start();
 }
 
 void SerialTerminal::on_pb_clear_read_clicked() {
@@ -200,24 +200,36 @@ void SerialTerminal::on_le_lineCount_returnPressed() {
 
 void SerialTerminal::updateSerial() {
     dataControlSignal = COMPORT->pinoutSignals();
-    if ((0xffff & QSerialPort::PinoutSignal::RingIndicatorSignal) & dataControlSignal) {
-        ui->l_RI->setStyleSheet("background-color: rgba(255,0,0,255)");
+    //    if ((0xffff & QSerialPort::PinoutSignal::RingIndicatorSignal) & dataControlSignal) {
+    if ((0xffff & 0x0020) & dataControlSignal) {
+        // ui->l_RI->setText("RI on");
+        ui->l_RI->setStyleSheet("background-color: rgba(255, 0, 0, 255);");
     } else {
-        ui->l_RI->setStyleSheet("background-color: rgba(255,0,0,0)");
+        // ui->l_RI->setText("RI off");
+        ui->l_RI->setStyleSheet("background-color: rgba(255, 0, 0, 0);");
     }
-    if ((0xffff & QSerialPort::PinoutSignal::DataCarrierDetectSignal) & dataControlSignal) {
-        ui->l_CD->setStyleSheet("background-color: rgba(255,0,0,255)");
+    //    if ((0xffff & QSerialPort::PinoutSignal::DataCarrierDetectSignal) & dataControlSignal) {
+    if ((0xffff & 0x0008) & dataControlSignal) {
+        // ui->l_CD->setText("CD on");
+        ui->l_CD->setStyleSheet("background-color: rgba(255, 0, 0, 255);");
     } else {
-        ui->l_CD->setStyleSheet("background-color: rgba(255,0,0,0)");
+        // ui->l_CD->setText("CD off");
+        ui->l_CD->setStyleSheet("background-color: rgba(255, 0, 0, 0);");
     }
-    if ((0xffff & QSerialPort::PinoutSignal::DataSetReadySignal) & dataControlSignal) {
-        ui->l_DSR->setStyleSheet("background-color: rgba(255,0,0,255)");
+    //    if ((0xffff & QSerialPort::PinoutSignal::DataSetReadySignal) & dataControlSignal) {
+    if ((0xffff & 0x0010) & dataControlSignal) {
+        // ui->l_DSR->setText("DSR on");
+        ui->l_DSR->setStyleSheet("background-color: rgba(255, 0, 0, 255);");
     } else {
-        ui->l_DSR->setStyleSheet("background-color: rgba(255,0,0,0)");
+        // ui->l_DSR->setText("DSR off");
+        ui->l_DSR->setStyleSheet("background-color: rgba(255, 0, 0, 0);");
     }
-    if ((0xffff & QSerialPort::PinoutSignal::ClearToSendSignal) & dataControlSignal) {
-        ui->l_CTS->setStyleSheet("background-color: rgba(255,0,0,255)");
+    //    if ((0xffff & QSerialPort::PinoutSignal::ClearToSendSignal) & dataControlSignal) {
+    if ((0xffff & 0x0080) & dataControlSignal) {
+        // ui->l_CTS->setText("CTS on");
+        ui->l_CTS->setStyleSheet("background-color: rgba(255, 0, 0, 255);");
     } else {
-        ui->l_CTS->setStyleSheet("background-color: rgba(255,0,0,0)");
+        // ui->l_CTS->setText("CTS off");
+        ui->l_CTS->setStyleSheet("background-color: rgba(255, 0, 0, 0);");
     }
 }

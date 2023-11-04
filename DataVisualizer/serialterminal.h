@@ -1,10 +1,11 @@
 #ifndef SERIALTERMINAL_H
 #define SERIALTERMINAL_H
 
-#include "taskserialrefresh.h"
 #include <QDialog>
+#include <QFuture>
 #include <QSerialPort>
-#include <QThread>
+#include <QTimer>
+
 
 namespace Ui {
 class serialTerminal;
@@ -24,9 +25,7 @@ public:
     QString FlowControl;
     QString Parity;
     QString StopBits;
-
     void start();
-    static void taskControlSignals(QSerialPort *port, uint16_t *data);
 
 signals:
 
@@ -42,7 +41,6 @@ private slots:
     void on_pb_DTR_toggled(bool checked);
     void on_le_send_returnPressed();
     void on_le_lineCount_returnPressed();
-
     void updateSerial();
 
 private:
@@ -50,7 +48,7 @@ private:
     QSerialPort *COMPORT;
     QByteArray dataFromSerial;
     uint16_t dataControlSignal;
-    TaskSerialRefresh *taskSerialSignals;
+    QTimer *timer;
 };
 
 #endif // SERIALTERMINAL_H

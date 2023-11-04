@@ -13,15 +13,13 @@ SOURCES += \
     mainwindow.cpp \
     networkdialog.cpp \
     serialdialog.cpp \
-    serialterminal.cpp \
-    taskserialrefresh.cpp
+    serialterminal.cpp
 
 HEADERS += \
     mainwindow.h \
     networkdialog.h \
     serialdialog.h \
-    serialterminal.h \
-    taskserialrefresh.h
+    serialterminal.h
 
 FORMS += \
     mainwindow.ui \
