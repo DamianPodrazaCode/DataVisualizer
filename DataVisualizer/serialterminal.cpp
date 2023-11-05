@@ -26,6 +26,7 @@ void SerialTerminal::start() {
     ui->cb_autoDelete->setChecked(MainWindow::getSettings("Serial Terminal", "AutoDelete").toInt());
     ui->le_lineCount->setText(MainWindow::getSettings("Serial Terminal", "LineCount"));
     ui->cb_hiddenCRLF->setChecked(MainWindow::getSettings("Serial Terminal", "ShowCRLF").toInt());
+    ui->le_send->setText(MainWindow::getSettings("Serial Terminal", "LastIn"));
     ui->pte_read->setMaximumBlockCount(ui->le_lineCount->text().toInt());
 
     COMPORT = new QSerialPort();
@@ -96,6 +97,7 @@ void SerialTerminal::on_serialTerminal_rejected() {
     MainWindow::setSettings("Serial Terminal", "AutoDelete", QString::number(ui->cb_autoDelete->isChecked()));
     MainWindow::setSettings("Serial Terminal", "LineCount", ui->le_lineCount->text());
     MainWindow::setSettings("Serial Terminal", "ShowCRLF", QString::number(ui->cb_hiddenCRLF->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "LastIn", ui->le_send->text());
     timer->stop();
     delete timer;
     COMPORT->close();
@@ -105,6 +107,32 @@ void SerialTerminal::on_serialTerminal_rejected() {
 void SerialTerminal::on_pb_send_clicked() {
     if (COMPORT->isOpen()) {
         QString send = ui->le_send->text();
+
+        for (int i = 0; i < send.length(); i++) {
+            // qInfo() << i << " " << send.at(i);
+            if (send.at(i) == '$') {
+                QString tmp = "0";
+                if ((i + 1) < send.length())
+                    tmp = send.at(i + 1);
+                if ((i + 2) < send.length())
+                    tmp += send.at(i + 2);
+                if (send.at(i + 1) == '$') {
+                    // qInfo() << "$$";
+                    i++;
+                } else {
+                    // qInfo() << tmp;
+                    bool ok;
+                    uint8_t hex = tmp.toUInt(&ok, 16);
+                    if (ok) {
+                        send.replace(i, 3, (QChar)hex);
+                        //i += 2;
+                    }
+                }
+            }
+        }
+
+        send.replace("$$", "$");
+
         if (ui->cb_CR->isChecked())
             send += char(13);
         if (ui->cb_LF->isChecked())

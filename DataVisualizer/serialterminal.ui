@@ -217,6 +217,7 @@
         <property name="font">
          <font>
           <family>Consolas</family>
+          <pointsize>10</pointsize>
          </font>
         </property>
         <property name="inputMethodHints">
@@ -258,6 +259,12 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLineEdit" name="le_send">
+          <property name="font">
+           <font>
+            <family>Consolas</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="inputMethodHints">
            <set>Qt::ImhDigitsOnly</set>
           </property>
