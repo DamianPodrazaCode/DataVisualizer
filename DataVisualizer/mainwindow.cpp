@@ -1,8 +1,8 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-
+#include "macrodialog.h"
 #include "networkdialog.h"
 #include "serialdialog.h"
+#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -42,6 +42,8 @@ void MainWindow::on_actionNetwork_triggered() {
 }
 
 void MainWindow::on_actionMacro1_triggered() {
+    MacroDialog *m1 = new MacroDialog(this);
+    m1->start("Macro1");
 }
 
 void MainWindow::on_actionMacro2_triggered() {

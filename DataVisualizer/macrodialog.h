@@ -13,6 +13,10 @@ class MacroDialog : public QDialog {
 public:
     explicit MacroDialog(QWidget *parent = nullptr);
     ~MacroDialog();
+    void start(QString str);
+
+private slots:
+    void on_MacroDialog_rejected();
 
 private:
     Ui::MacroDialog *ui;
