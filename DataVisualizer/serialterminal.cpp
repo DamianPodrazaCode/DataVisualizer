@@ -109,7 +109,6 @@ void SerialTerminal::on_pb_send_clicked() {
         QString send = ui->le_send->text();
 
         for (int i = 0; i < send.length(); i++) {
-            // qInfo() << i << " " << send.at(i);
             if (send.at(i) == '$') {
                 QString tmp = "0";
                 if ((i + 1) < send.length())
@@ -117,21 +116,16 @@ void SerialTerminal::on_pb_send_clicked() {
                 if ((i + 2) < send.length())
                     tmp += send.at(i + 2);
                 if (send.at(i + 1) == '$') {
-                    // qInfo() << "$$";
-                    i++;
+                    send.replace(i, 2, '$');
                 } else {
-                    // qInfo() << tmp;
                     bool ok;
                     uint8_t hex = tmp.toUInt(&ok, 16);
                     if (ok) {
                         send.replace(i, 3, (QChar)hex);
-                        //i += 2;
                     }
                 }
             }
         }
-
-        send.replace("$$", "$");
 
         if (ui->cb_CR->isChecked())
             send += char(13);
