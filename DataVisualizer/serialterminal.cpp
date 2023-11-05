@@ -105,7 +105,8 @@ void SerialTerminal::on_pb_send_clicked() {
             send += char(13);
         if (ui->cb_LF->isChecked())
             send += char(10);
-        COMPORT->write(send.toLatin1());
+        //COMPORT->write(send.toLatin1());
+        COMPORT->write(send.toUtf8());
         COMPORT->flush();
     }
 }
@@ -116,12 +117,12 @@ void SerialTerminal::read_data() {
         if (COMPORT->bytesAvailable()) {
             dataFromSerial.append(COMPORT->readAll());
         }
-        // wszystko co powyżej 0x7f nie jest znakiem ascii tylko unicode i rzeba zaczekać na doczytanie
+        // wszystko co powyżej 0x7f nie jest znakiem ascii tylko unicode i trzeba zaczekać na doczytanie
         if ((uint8_t)dataFromSerial.back() > 0x7f) {
             // qInfo() << dataFromSerial.back();
         } else {
             QString lineShow = dataFromSerial;
-            dataFromSerial.clear();
+
 
             if (!ui->pb_startStop->isChecked()) {
                 if (ui->cb_utf8->isChecked()) {
@@ -145,14 +146,19 @@ void SerialTerminal::read_data() {
                     ui->pte_read->insertPlainText(lineShow.toLatin1());
                 }
                 if (ui->cb_hex->isChecked()) {
-                    QByteArray bytes(lineShow.toUtf8());
                     QString hexLine;
-                    if (bytes.back() == '\n')
-                        hexLine = bytes.toHex(' ') + "\n";
+                    if (dataFromSerial.back() == '\n')
+                        hexLine = dataFromSerial.toHex(' ') + "\n";
                     else
-                        hexLine = bytes.toHex(' ');
+                        hexLine = dataFromSerial.toHex(' ') + "";
+                    // problem z brakiem spacji przed hexem
+                    if (hexLine.first(1) != ' ') {
+                        hexLine.insert(0, ' ');
+                    }
                     ui->pte_read->insertPlainText(hexLine);
                 }
+
+                dataFromSerial.clear();
             }
             if (ui->cb_rewind->isChecked()) {
                 ui->pte_read->ensureCursorVisible();
@@ -199,7 +205,7 @@ void SerialTerminal::on_pb_DTR_toggled(bool checked) {
 }
 
 void SerialTerminal::on_le_send_returnPressed() {
-    on_pb_send_clicked();
+   // on_pb_send_clicked();
 }
 
 void SerialTerminal::on_le_lineCount_returnPressed() {
