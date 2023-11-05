@@ -29,6 +29,17 @@ void SerialTerminal::start() {
     ui->le_send->setText(MainWindow::getSettings("Serial Terminal", "LastIn"));
     ui->pte_read->setMaximumBlockCount(ui->le_lineCount->text().toInt());
 
+    ui->pb_mac1->setToolTip(MainWindow::getSettings("Serial Macro", "Macro1"));
+    ui->pb_mac2->setToolTip(MainWindow::getSettings("Serial Macro", "Macro2"));
+    ui->pb_mac3->setToolTip(MainWindow::getSettings("Serial Macro", "Macro3"));
+    ui->pb_mac4->setToolTip(MainWindow::getSettings("Serial Macro", "Macro4"));
+    ui->pb_mac5->setToolTip(MainWindow::getSettings("Serial Macro", "Macro5"));
+    ui->pb_mac6->setToolTip(MainWindow::getSettings("Serial Macro", "Macro6"));
+    ui->pb_mac7->setToolTip(MainWindow::getSettings("Serial Macro", "Macro7"));
+    ui->pb_mac8->setToolTip(MainWindow::getSettings("Serial Macro", "Macro8"));
+    ui->pb_mac9->setToolTip(MainWindow::getSettings("Serial Macro", "Macro9"));
+    ui->pb_mac10->setToolTip(MainWindow::getSettings("Serial Macro", "Macro10"));
+
     COMPORT = new QSerialPort();
     COMPORT->setPortName(PortName);
     COMPORT->setBaudRate(BaudRate.toInt());

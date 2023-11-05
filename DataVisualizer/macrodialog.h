@@ -16,10 +16,12 @@ public:
     void start(QString str);
 
 private slots:
-    void on_MacroDialog_rejected();
+    void on_pb_cancel_clicked();
+    void on_pb_Save_clicked();
 
 private:
     Ui::MacroDialog *ui;
+    QString title;
 };
 
 #endif // MACRODIALOG_H
