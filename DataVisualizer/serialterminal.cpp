@@ -18,6 +18,8 @@ void SerialTerminal::start() {
     ui->cb_LF->setChecked(MainWindow::getSettings("Serial Terminal", "inLF").toInt());
     ui->cb_ascii->setChecked(MainWindow::getSettings("Serial Terminal", "ASCII").toInt());
     ui->cb_utf8->setChecked(MainWindow::getSettings("Serial Terminal", "UTF8").toInt());
+    ui->rb_ASCII->setChecked(MainWindow::getSettings("Serial Terminal", "ASCII_IN").toInt());
+    ui->rb_UTF8->setChecked(MainWindow::getSettings("Serial Terminal", "UTF8_IN").toInt());
     ui->cb_hex->setChecked(MainWindow::getSettings("Serial Terminal", "HEX").toInt());
     ui->cb_warp->setChecked(MainWindow::getSettings("Serial Terminal", "WARP").toInt());
     ui->cb_rewind->setChecked(MainWindow::getSettings("Serial Terminal", "AutoScroll").toInt());
@@ -86,6 +88,8 @@ void SerialTerminal::on_serialTerminal_rejected() {
     MainWindow::setSettings("Serial Terminal", "inLF", QString::number(ui->cb_LF->isChecked()));
     MainWindow::setSettings("Serial Terminal", "ASCII", QString::number(ui->cb_ascii->isChecked()));
     MainWindow::setSettings("Serial Terminal", "UTF8", QString::number(ui->cb_utf8->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "ASCII_IN", QString::number(ui->rb_ASCII->isChecked()));
+    MainWindow::setSettings("Serial Terminal", "UTF8_IN", QString::number(ui->rb_UTF8->isChecked()));
     MainWindow::setSettings("Serial Terminal", "HEX", QString::number(ui->cb_hex->isChecked()));
     MainWindow::setSettings("Serial Terminal", "WARP", QString::number(ui->cb_warp->isChecked()));
     MainWindow::setSettings("Serial Terminal", "AutoScroll", QString::number(ui->cb_rewind->isChecked()));
@@ -105,8 +109,10 @@ void SerialTerminal::on_pb_send_clicked() {
             send += char(13);
         if (ui->cb_LF->isChecked())
             send += char(10);
-        //COMPORT->write(send.toLatin1());
-        COMPORT->write(send.toUtf8());
+        if (ui->rb_ASCII->isChecked())
+            COMPORT->write(send.toLatin1());
+        if (ui->rb_UTF8->isChecked())
+            COMPORT->write(send.toUtf8());
         COMPORT->flush();
     }
 }
@@ -122,7 +128,6 @@ void SerialTerminal::read_data() {
             // qInfo() << dataFromSerial.back();
         } else {
             QString lineShow = dataFromSerial;
-
 
             if (!ui->pb_startStop->isChecked()) {
                 if (ui->cb_utf8->isChecked()) {
@@ -205,7 +210,7 @@ void SerialTerminal::on_pb_DTR_toggled(bool checked) {
 }
 
 void SerialTerminal::on_le_send_returnPressed() {
-   // on_pb_send_clicked();
+    // on_pb_send_clicked();
 }
 
 void SerialTerminal::on_le_lineCount_returnPressed() {
