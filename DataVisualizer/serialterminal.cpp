@@ -116,16 +116,9 @@ void SerialTerminal::read_data() {
         if (COMPORT->bytesAvailable()) {
             dataFromSerial.append(COMPORT->readAll());
         }
-        // if (dataFromSerial.contains(char(10)))
-        //{
-        //  QString lineShow = dataFromSerial.left(dataFromSerial.indexOf(char(10)) + 1);
-        //  dataFromSerial.remove(0, dataFromSerial.indexOf(char(10)) + 1);
-
         // wszystko co powyżej 0x7f nie jest znakiem ascii tylko unicode i rzeba zaczekać na doczytanie
         if ((uint8_t)dataFromSerial.back() > 0x7f) {
-            qInfo() << dataFromSerial.back();
-            // timer->start();
-            // return;
+            // qInfo() << dataFromSerial.back();
         } else {
             QString lineShow = dataFromSerial;
             dataFromSerial.clear();
@@ -164,7 +157,6 @@ void SerialTerminal::read_data() {
             if (ui->cb_rewind->isChecked()) {
                 ui->pte_read->ensureCursorVisible();
             }
-            //}
         }
     }
     timer->start();
