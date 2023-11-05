@@ -125,6 +125,24 @@ void SerialTerminal::on_pb_send_clicked() {
                     }
                 }
             }
+            if (send.at(i) == '#') {
+                QString tmp = "0";
+                if ((i + 1) < send.length())
+                    tmp = send.at(i + 1);
+                if ((i + 2) < send.length())
+                    tmp += send.at(i + 2);
+                if ((i + 3) < send.length())
+                    tmp += send.at(i + 3);
+                if (send.at(i + 1) == '#') {
+                    send.replace(i, 2, '#');
+                } else {
+                    bool ok;
+                    uint8_t dec = tmp.toUInt(&ok, 10);
+                    if (ok) {
+                        send.replace(i, 4, (QChar)dec);
+                    }
+                }
+            }
         }
 
         if (ui->cb_CR->isChecked())

@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    macrodialog.cpp \
     main.cpp \
     mainwindow.cpp \
     networkdialog.cpp \
@@ -16,12 +17,14 @@ SOURCES += \
     serialterminal.cpp
 
 HEADERS += \
+    macrodialog.h \
     mainwindow.h \
     networkdialog.h \
     serialdialog.h \
     serialterminal.h
 
 FORMS += \
+    macrodialog.ui \
     mainwindow.ui \
     networkdialog.ui \
     serialdialog.ui \
