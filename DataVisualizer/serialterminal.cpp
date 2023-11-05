@@ -73,11 +73,12 @@ void SerialTerminal::start() {
         delete COMPORT;
         close();
     }
-    connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
 
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(updateSerial()));
     timer->start(100);
+
+    connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
 }
 
 void SerialTerminal::on_serialTerminal_rejected() {
@@ -110,14 +111,24 @@ void SerialTerminal::on_pb_send_clicked() {
 }
 
 void SerialTerminal::read_data() {
-    timer->stop();  // trzeba zatrzymać timer i przestać odczytywać piny FlowControl bop nie można odczytywać podwójnie portu.
+    timer->stop(); // trzeba zatrzymać timer i przestać odczytywać piny FlowControl bop nie można odczytywać podwójnie portu.
     if (COMPORT->isOpen()) {
         if (COMPORT->bytesAvailable()) {
             dataFromSerial.append(COMPORT->readAll());
         }
-        if (dataFromSerial.contains(char(10))) {
-            QString lineShow = dataFromSerial.left(dataFromSerial.indexOf(char(10)) + 1);
-            dataFromSerial.remove(0, dataFromSerial.indexOf(char(10)) + 1);
+        // if (dataFromSerial.contains(char(10)))
+        //{
+        //  QString lineShow = dataFromSerial.left(dataFromSerial.indexOf(char(10)) + 1);
+        //  dataFromSerial.remove(0, dataFromSerial.indexOf(char(10)) + 1);
+
+        // wszystko co powyżej 0x7f nie jest znakiem ascii tylko unicode i rzeba zaczekać na doczytanie
+        if ((uint8_t)dataFromSerial.back() > 0x7f) {
+            qInfo() << dataFromSerial.back();
+            // timer->start();
+            // return;
+        } else {
+            QString lineShow = dataFromSerial;
+            dataFromSerial.clear();
 
             if (!ui->pb_startStop->isChecked()) {
                 if (ui->cb_utf8->isChecked()) {
@@ -142,13 +153,18 @@ void SerialTerminal::read_data() {
                 }
                 if (ui->cb_hex->isChecked()) {
                     QByteArray bytes(lineShow.toUtf8());
-                    QString hexLine = bytes.toHex(' ') + "\n";
+                    QString hexLine;
+                    if (bytes.back() == '\n')
+                        hexLine = bytes.toHex(' ') + "\n";
+                    else
+                        hexLine = bytes.toHex(' ');
                     ui->pte_read->insertPlainText(hexLine);
                 }
             }
             if (ui->cb_rewind->isChecked()) {
                 ui->pte_read->ensureCursorVisible();
             }
+            //}
         }
     }
     timer->start();
