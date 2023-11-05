@@ -36,30 +36,18 @@ private slots:
     void on_actionMacro8_triggered();
     void on_actionMacro9_triggered();
     void on_actionMacro10_triggered();
-
     void on_actionMacro1_hovered();
-
     void on_actionMacro2_hovered();
-
     void on_actionMacro3_hovered();
-
     void on_actionMacro4_hovered();
-
-
     void on_actionMacro5_hovered();
-
     void on_actionMacro6_hovered();
-
     void on_actionMacro7_hovered();
-
     void on_actionMacro8_hovered();
-
     void on_actionMacro9_hovered();
-
     void on_actionMacro10_hovered();
 
 private:
     Ui::MainWindow *ui;
-
 };
 #endif // MAINWINDOW_H

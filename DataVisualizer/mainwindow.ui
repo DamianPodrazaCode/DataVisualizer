@@ -13,7 +13,13 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QListWidget" name="listWidget"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -57,8 +63,17 @@
     <addaction name="actionMacro9"/>
     <addaction name="actionMacro10"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionMacro"/>
+    <addaction name="actionInfo"/>
+    <addaction name="actionASCII_tab"/>
+   </widget>
    <addaction name="menuNew_connect"/>
    <addaction name="menuMacro"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
@@ -163,6 +178,21 @@
   <action name="actionMacro10">
    <property name="text">
     <string>Macro10</string>
+   </property>
+  </action>
+  <action name="actionMacro">
+   <property name="text">
+    <string>Macro</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="actionASCII_tab">
+   <property name="text">
+    <string>ASCII tab</string>
    </property>
   </action>
  </widget>
