@@ -508,6 +508,37 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pb_send</tabstop>
+  <tabstop>rb_ASCII</tabstop>
+  <tabstop>rb_UTF8</tabstop>
+  <tabstop>cb_CR</tabstop>
+  <tabstop>cb_LF</tabstop>
+  <tabstop>pb_mac1</tabstop>
+  <tabstop>pb_mac2</tabstop>
+  <tabstop>pb_mac3</tabstop>
+  <tabstop>pb_mac4</tabstop>
+  <tabstop>pb_mac5</tabstop>
+  <tabstop>pb_mac6</tabstop>
+  <tabstop>pb_mac7</tabstop>
+  <tabstop>pb_mac8</tabstop>
+  <tabstop>pb_mac9</tabstop>
+  <tabstop>pb_mac10</tabstop>
+  <tabstop>pb_DTR</tabstop>
+  <tabstop>pb_RTS</tabstop>
+  <tabstop>cb_ascii</tabstop>
+  <tabstop>cb_utf8</tabstop>
+  <tabstop>cb_hex</tabstop>
+  <tabstop>cb_warp</tabstop>
+  <tabstop>cb_rewind</tabstop>
+  <tabstop>cb_autoDelete</tabstop>
+  <tabstop>pb_clear_read</tabstop>
+  <tabstop>pb_startStop</tabstop>
+  <tabstop>le_lineCount</tabstop>
+  <tabstop>cb_hiddenCRLF</tabstop>
+  <tabstop>le_send</tabstop>
+  <tabstop>pte_read</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

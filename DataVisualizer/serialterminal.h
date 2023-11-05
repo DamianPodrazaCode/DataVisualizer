@@ -43,6 +43,26 @@ private slots:
     void on_le_lineCount_returnPressed();
     void updateSerial();
 
+    void on_pb_mac1_clicked();
+
+    void on_pb_mac2_clicked();
+
+    void on_pb_mac3_clicked();
+
+    void on_pb_mac4_clicked();
+
+    void on_pb_mac5_clicked();
+
+    void on_pb_mac6_clicked();
+
+    void on_pb_mac7_clicked();
+
+    void on_pb_mac8_clicked();
+
+    void on_pb_mac9_clicked();
+
+    void on_pb_mac10_clicked();
+
 private:
     Ui::serialTerminal *ui;
     QSerialPort *COMPORT;

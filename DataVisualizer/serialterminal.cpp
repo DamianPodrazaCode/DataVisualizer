@@ -303,3 +303,43 @@ void SerialTerminal::updateSerial() {
         ui->l_CTS->setStyleSheet("background-color: rgba(255, 0, 0, 0);");
     }
 }
+
+void SerialTerminal::on_pb_mac1_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro1"));
+}
+
+void SerialTerminal::on_pb_mac2_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro2"));
+}
+
+void SerialTerminal::on_pb_mac3_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro3"));
+}
+
+void SerialTerminal::on_pb_mac4_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro4"));
+}
+
+void SerialTerminal::on_pb_mac5_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro5"));
+}
+
+void SerialTerminal::on_pb_mac6_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro6"));
+}
+
+void SerialTerminal::on_pb_mac7_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro7"));
+}
+
+void SerialTerminal::on_pb_mac8_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro8"));
+}
+
+void SerialTerminal::on_pb_mac9_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro9"));
+}
+
+void SerialTerminal::on_pb_mac10_clicked() {
+    ui->le_send->setText(MainWindow::getSettings("Serial Macro", "Macro10"));
+}
