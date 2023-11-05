@@ -30,6 +30,22 @@ private slots:
 
     void on_actionMacro2_triggered();
 
+    void on_actionMacro3_triggered();
+
+    void on_actionMacro4_triggered();
+
+    void on_actionMacro5_triggered();
+
+    void on_actionMacro6_triggered();
+
+    void on_actionMacro7_triggered();
+
+    void on_actionMacro8_triggered();
+
+    void on_actionMacro9_triggered();
+
+    void on_actionMacro10_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -52,26 +52,32 @@ void SerialDialog::on_pb_rescan_clicked() {
 }
 
 void SerialDialog::on_cb_baudrate_currentIndexChanged(int index) {
+    Q_UNUSED(index)
     MainWindow::setSettings("serial", "BaudRate", ui->cb_baudrate->currentText());
 }
 
 void SerialDialog::on_cb_databits_currentIndexChanged(int index) {
+    Q_UNUSED(index)
     MainWindow::setSettings("serial", "DataBits", ui->cb_databits->currentText());
 }
 
 void SerialDialog::on_cb_direction_currentIndexChanged(int index) {
+    Q_UNUSED(index)
     MainWindow::setSettings("serial", "Direction", ui->cb_direction->currentText());
 }
 
 void SerialDialog::on_cb_flowcontrol_currentIndexChanged(int index) {
+    Q_UNUSED(index)
     MainWindow::setSettings("serial", "FlowControl", ui->cb_flowcontrol->currentText());
 }
 
 void SerialDialog::on_cb_parity_currentIndexChanged(int index) {
+    Q_UNUSED(index)
     MainWindow::setSettings("serial", "Parity", ui->cb_parity->currentText());
 }
 
 void SerialDialog::on_cb_stopbits_currentIndexChanged(int index) {
+    Q_UNUSED(index)
     MainWindow::setSettings("serial", "StopBits", ui->cb_stopbits->currentText());
 }
 

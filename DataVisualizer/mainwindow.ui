@@ -47,7 +47,7 @@
     <addaction name="actionMacro5"/>
     <addaction name="actionMacro6"/>
     <addaction name="actionMacro7"/>
-    <addaction name="actionMacrop8"/>
+    <addaction name="actionMacro8"/>
     <addaction name="actionMacro9"/>
     <addaction name="actionMacro10"/>
    </widget>
@@ -128,7 +128,7 @@
     <string>Macro7</string>
    </property>
   </action>
-  <action name="actionMacrop8">
+  <action name="actionMacro8">
    <property name="text">
     <string>Macro8</string>
    </property>

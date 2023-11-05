@@ -42,12 +42,31 @@ void MainWindow::on_actionNetwork_triggered() {
 }
 
 void MainWindow::on_actionMacro1_triggered() {
-    qInfo() << "ok" << ui->menuMacro->activeAction();
 }
 
-
-void MainWindow::on_actionMacro2_triggered()
-{
-     qInfo() << "ok" << ui->menuMacro->activeAction();
+void MainWindow::on_actionMacro2_triggered() {
 }
 
+void MainWindow::on_actionMacro3_triggered() {
+}
+
+void MainWindow::on_actionMacro4_triggered() {
+}
+
+void MainWindow::on_actionMacro5_triggered() {
+}
+
+void MainWindow::on_actionMacro6_triggered() {
+}
+
+void MainWindow::on_actionMacro7_triggered() {
+}
+
+void MainWindow::on_actionMacro8_triggered() {
+}
+
+void MainWindow::on_actionMacro9_triggered() {
+}
+
+void MainWindow::on_actionMacro10_triggered() {
+}
