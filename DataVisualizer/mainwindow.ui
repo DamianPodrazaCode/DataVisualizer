@@ -42,6 +42,14 @@
     </property>
     <addaction name="actionMacro1"/>
     <addaction name="actionMacro2"/>
+    <addaction name="actionMacro3"/>
+    <addaction name="actionMacro4"/>
+    <addaction name="actionMacro5"/>
+    <addaction name="actionMacro6"/>
+    <addaction name="actionMacro7"/>
+    <addaction name="actionMacrop8"/>
+    <addaction name="actionMacro9"/>
+    <addaction name="actionMacro10"/>
    </widget>
    <addaction name="menuNew_connect"/>
    <addaction name="menuMacro"/>
@@ -93,6 +101,46 @@
   <action name="actionMacro2">
    <property name="text">
     <string>Macro2</string>
+   </property>
+  </action>
+  <action name="actionMacro3">
+   <property name="text">
+    <string>Macro3</string>
+   </property>
+  </action>
+  <action name="actionMacro4">
+   <property name="text">
+    <string>Macro4</string>
+   </property>
+  </action>
+  <action name="actionMacro5">
+   <property name="text">
+    <string>Macro5</string>
+   </property>
+  </action>
+  <action name="actionMacro6">
+   <property name="text">
+    <string>Macro6</string>
+   </property>
+  </action>
+  <action name="actionMacro7">
+   <property name="text">
+    <string>Macro7</string>
+   </property>
+  </action>
+  <action name="actionMacrop8">
+   <property name="text">
+    <string>Macro8</string>
+   </property>
+  </action>
+  <action name="actionMacro9">
+   <property name="text">
+    <string>Macro9</string>
+   </property>
+  </action>
+  <action name="actionMacro10">
+   <property name="text">
+    <string>Macro10</string>
    </property>
   </action>
  </widget>

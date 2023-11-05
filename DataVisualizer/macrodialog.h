@@ -7,8 +7,7 @@ namespace Ui {
 class MacroDialog;
 }
 
-class MacroDialog : public QDialog
-{
+class MacroDialog : public QDialog {
     Q_OBJECT
 
 public:

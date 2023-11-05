@@ -26,6 +26,10 @@ private slots:
     void on_actionSerial_triggered();
     void on_actionNetwork_triggered();
 
+    void on_actionMacro1_triggered();
+
+    void on_actionMacro2_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -40,3 +40,14 @@ void MainWindow::on_actionNetwork_triggered() {
     network->setWindowTitle("New Network Connection.");
     network->show();
 }
+
+void MainWindow::on_actionMacro1_triggered() {
+    qInfo() << "ok" << ui->menuMacro->activeAction();
+}
+
+
+void MainWindow::on_actionMacro2_triggered()
+{
+     qInfo() << "ok" << ui->menuMacro->activeAction();
+}
+
