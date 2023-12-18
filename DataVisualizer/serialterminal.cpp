@@ -90,7 +90,7 @@ void SerialTerminal::start() {
 
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(updateSerial()));
-    timer->start(100);
+    timer->start(500);
 
     connect(COMPORT, SIGNAL(readyRead()), this, SLOT(read_data()));
 }
@@ -170,6 +170,8 @@ void SerialTerminal::on_pb_send_clicked() {
 
 void SerialTerminal::read_data() {
     timer->stop(); // trzeba zatrzymać timer i przestać odczytywać piny FlowControl bop nie można odczytywać podwójnie portu.
+    //QThread::currentThread()->msleep(1);
+
     if (COMPORT->isOpen()) {
         if (COMPORT->bytesAvailable()) {
             dataFromSerial.append(COMPORT->readAll());
