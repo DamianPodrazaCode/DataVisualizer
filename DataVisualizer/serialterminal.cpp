@@ -169,7 +169,7 @@ void SerialTerminal::on_pb_send_clicked() {
 }
 
 void SerialTerminal::read_data() {
-    timer->stop(); // trzeba zatrzymać timer i przestać odczytywać piny FlowControl bop nie można odczytywać podwójnie portu.
+    timer->stop(); // trzeba zatrzymać timer i przestać odczytywać piny FlowControl bo nie można odczytywać podwójnie portu.
     //QThread::currentThread()->msleep(1);
 
     if (COMPORT->isOpen()) {
